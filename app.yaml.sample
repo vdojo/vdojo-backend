@@ -1,0 +1,4 @@
+runtime: nodejs10
+service: vdojo-api
+env_variables:
+  DB_HOST: ${DB_HOST}

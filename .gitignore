@@ -1,0 +1,15 @@
+node_modules
+.idea
+.env.local
+.env
+app.yaml
+
+app.yaml
+*.crt
+*.csr
+*.key
+
+results/
+dist/
+coverage/
+*.log
