@@ -7,6 +7,8 @@ import mongoose from "mongoose";
 import morgan from "morgan";
 import "reflect-metadata";
 import { useExpressServer } from "routing-controllers";
+import swaggerUI from "swagger-ui-express";
+import * as swaggerDocument from "../docs/swagger.json";
 import HealthController from "./controllers/health.controller";
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -14,13 +16,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan("dev"));
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 if (!isProduction) {
     app.use(errorHandler());
     mongoose.set("debug", true);
     dotenv.config();
 }
-const port = process.env.PORT || 8080; // default port to listen
+const port = process.env.PORT || 8085; // default port to listen
 
 mongoose.set("useFindAndModify", false);
 mongoose.connect(process.env.DB_HOST, {
